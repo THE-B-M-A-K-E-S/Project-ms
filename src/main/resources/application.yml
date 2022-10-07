@@ -1,0 +1,32 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: project-ms
+  data:
+    mongodb:
+      uri: mongodb+srv://bassem:bassem@authentication.6mvbj9d.mongodb.net/?retryWrites=true&w=majority
+      database: projects
+      auto-index-creation: true
+  main:
+    allow-circular-references: true
+  banner:
+    location : classpath:banner.txt
+  profiles:
+    active: native
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: true
+
+logging:
+  level:
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG
+management:
+  info:
+    env:
+      enabled: true
