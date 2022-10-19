@@ -15,4 +15,20 @@ public class ProjectService {
     public List<Project> findAll() {
         return projectRepository.findAll();
     }
+
+    public Project findById(String id) {
+        return projectRepository.findById(id).get();
+    }
+
+    public Project save(Project project) {
+        return projectRepository.save(project);
+    }
+
+    public Project update(Project project) {
+        return projectRepository.save(project);
+    }
+
+    public void delete(String id) {
+        projectRepository.deleteById(id);
+    }
 }
