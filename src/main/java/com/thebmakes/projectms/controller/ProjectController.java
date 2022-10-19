@@ -40,5 +40,20 @@ public class ProjectController {
         projectService.delete(id);
     }
 
+    @GetMapping("/users/{userId}")
+    public List<Project> getUserProjects(@PathVariable String userId) {
+        return projectService.findByUsersContains(userId);
+    }
+
+    @GetMapping("/users/{userId}/projects/{projectId}")
+    public boolean isUserInProject(@PathVariable String userId, @PathVariable String projectId) {
+        return projectService.isUserInProject(userId, projectId);
+    }
+
+    @DeleteMapping("/users/{userId}/projects/{projectId}")
+    public boolean removeUserFromProject(@PathVariable String userId, @PathVariable String projectId) {
+        return projectService.removeUserFromProject(userId, projectId);
+    }
+
 
 }

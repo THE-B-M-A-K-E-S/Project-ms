@@ -31,4 +31,23 @@ public class ProjectService {
     public void delete(String id) {
         projectRepository.deleteById(id);
     }
+
+    public List<Project> findByUsersContains(String userId) {
+        return projectRepository.findByUsersContains(userId);
+    }
+
+    public boolean isUserInProject(String userId, String projectId) {
+        Project project = findById(projectId);
+        return project.getUsers().contains(userId);
+    }
+
+    public boolean removeUserFromProject(String userId, String projectId) {
+        Project project = findById(projectId);
+        if (project.getUsers().contains(userId)) {
+            project.getUsers().remove(userId);
+            projectRepository.save(project);
+            return true;
+        }
+        return false;
+    }
 }
