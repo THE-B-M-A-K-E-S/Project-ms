@@ -1,6 +1,7 @@
 package com.thebmakes.projectms.service;
 
 import com.thebmakes.projectms.entity.Project;
+import com.thebmakes.projectms.feign.TaskConsumer;
 import com.thebmakes.projectms.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,13 +12,22 @@ import java.util.List;
 public class ProjectService {
     @Autowired
     private ProjectRepository projectRepository;
+    @Autowired
+    private TaskConsumer taskConsumer;
 
     public List<Project> findAll() {
-        return projectRepository.findAll();
+        List<Project> projects = projectRepository.findAll();
+        projects.forEach(project -> {
+            project.setTasks(taskConsumer.findAllByProjectId(project.getId()));
+        });
+        return projects;
     }
 
     public Project findById(String id) {
-        return projectRepository.findById(id).get();
+
+        Project project = projectRepository.findById(id).get();
+        project.setTasks(taskConsumer.findAllByProjectId(id));
+        return project;
     }
 
     public Project save(Project project) {

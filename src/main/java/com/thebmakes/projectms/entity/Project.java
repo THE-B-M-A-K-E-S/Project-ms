@@ -1,6 +1,7 @@
 package com.thebmakes.projectms.entity;
 
 
+import com.thebmakes.projectms.feign.Task;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,4 +20,5 @@ public class Project {
     private String name;
     private String description;
     private List<String> users;
+    private List<Task> tasks;
 }
