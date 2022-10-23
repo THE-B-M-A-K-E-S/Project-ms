@@ -55,5 +55,9 @@ public class ProjectController {
         return projectService.removeUserFromProject(userId, projectId);
     }
 
+    @PostMapping("/users/{userId}/projects/{projectId}")
+    public Project addUserFromProject(@PathVariable String userId, @PathVariable String projectId) {
+        return projectService.addUserFromProject(userId, projectId);
+    }
 
 }
